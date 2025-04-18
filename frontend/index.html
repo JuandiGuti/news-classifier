@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Blue Panda News</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-titulo">
+            <img src="img/panda.png" alt="Panda Logo">
+            <h1>Blue Panda News</h1>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        <section class="clasificador">
+            <textarea id="texto" placeholder="Escribe una noticia para clasificar..."></textarea>
+            <button id="btn-clasificar">Clasificar</button>
+            <div id="resultado">Aquí aparecerá la categoría</div>
+        </section>
+
+        <section class="historial">
+            <h2>Noticias ingresadas</h2>
+            <ul id="lista-noticias">
+                <li>(Vacío por ahora)</li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
