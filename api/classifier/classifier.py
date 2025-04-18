@@ -1,6 +1,6 @@
 from collections import defaultdict
 import math
-from tokenizer import preprocess_text
+from classifier.tokenizer import preprocess_text
 
 class NaiveBayesClassifier:
     def __init__(self):
