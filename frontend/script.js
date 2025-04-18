@@ -1,38 +1,42 @@
-document.getElementById("btn-clasificar").addEventListener("click", () => {
-    const texto = document.getElementById("texto").value;
-    const resultadoDiv = document.getElementById("resultado");
+document.addEventListener("DOMContentLoaded", () => {
+    const boton = document.getElementById("btn-clasificar");
+    const input = document.getElementById("texto");
+    const resultado = document.getElementById("resultado");
+    const listaNoticias = document.getElementById("lista-noticias");
 
-    if (texto.trim() === "") {
-        resultadoDiv.textContent = "Por favor, escribe una noticia.";
-        return;
-    }
+    boton.addEventListener("click", async () => {
+        const texto = input.value.trim();
 
-    // Simulamos categoría (esto se conectará al backend después)
-    let categoria = "General";
-    if (texto.toLowerCase().includes("messi") || texto.toLowerCase().includes("fútbol")) {
-        categoria = "Deportes";
-    } else if (texto.toLowerCase().includes("dólar") || texto.toLowerCase().includes("bitcoin")) {
-        categoria = "Economía";
-    }
+        if (texto === "") {
+            resultado.textContent = "Por favor escribe una noticia.";
+            return;
+        }
 
-    resultadoDiv.textContent = `Categoría: ${categoria}`;
+        try {
+            const response = await fetch("http://127.0.0.1:8000/get-text-news", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ texto }),
+            });
 
-    // Crear item completo
-    const lista = document.getElementById("lista-noticias");
-    const item = document.createElement("li");
+            const data = await response.json();
+            resultado.textContent = `Category: ${data.category}`;
 
-    item.innerHTML = `
-        <strong>Noticia:</strong> ${texto}<br>
-        <strong>Categoría:</strong> ${categoria}
-    `;
-    lista.appendChild(item);
+            // Quitar el mensaje por defecto si aún existe
+            const mensajeVacio = listaNoticias.querySelector("li");
+            if (mensajeVacio && mensajeVacio.textContent.includes("Empty")) {
+                listaNoticias.innerHTML = "";
+            }
 
-    // Limpiar textarea
-    document.getElementById("texto").value = "";
-
-    // Eliminar mensaje de vacío si existe
-    const vacio = document.querySelector("#lista-noticias li:first-child");
-    if (vacio && vacio.textContent.includes("Vacío")) {
-        vacio.remove();
-    }
+            // Agregar la noticia al historial con formato personalizado
+            const nuevoItem = document.createElement("li");
+            nuevoItem.innerHTML = `<strong>News:</strong> ${texto}<br><strong>Category:</strong> ${data.category}`;
+            listaNoticias.appendChild(nuevoItem);
+        } catch (error) {
+            resultado.textContent = "Error al conectar con la API.";
+            console.error(error);
+        }
+    });
 });
