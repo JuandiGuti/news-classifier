@@ -39,8 +39,12 @@ cd news-classifier
 Abrí una **primera terminal** y ejecutá:
 
 ```bash
-cd backend
-venv\Scripts\activate          # En Windows
+cd api
+cd venv\Scripts\         # En Windows
+activate
+cd ..
+cd ..
+
 # o
 source venv/bin/activate         # En Linux/Mac
 
