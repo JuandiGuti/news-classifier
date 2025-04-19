@@ -28,8 +28,8 @@ El objetivo del sistema es permitir a los usuarios ingresar textos tipo noticia,
 Cloná este repositorio o descargá el archivo `.zip` y descomprimilo:
 
 ```bash
-git clone https://github.com/usuario/blue-panda-news.git
-cd blue-panda-news
+git clone https://github.com/JuandiGuti/news-classifier
+cd news-classifier
 ```
 
 ---
