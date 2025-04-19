@@ -40,10 +40,10 @@ Abrí una **primera terminal** y ejecutá:
 
 ```bash
 cd api
-cd venv\Scripts\         # En Windows
-activate
-cd ..
-cd ..
+
+python -m venv venv
+
+.\venv\Scripts\activate          #powershell de windows
 
 # o
 source venv/bin/activate         # En Linux/Mac
